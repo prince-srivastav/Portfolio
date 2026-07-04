@@ -391,15 +391,89 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
 .fade-up{opacity:1; transform:none; transition:opacity .8s ease, transform .8s ease;}
 .fade-up.pre-reveal{opacity:0; transform:translateY(46px);}
 .section, #home{scroll-margin-top:100px;}
+/* ============================================= 
+   UNIVERSAL HIGH-PRIORITY DROPLET EFFECT 
+============================================= */
+.stat-card, .exp-card, .experience-card, .project-card, .skill-group, .glass-tile, .certification-card, .cert-card, [class*="cert"] {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  will-change: transform;
+}
+
+.stat-card:hover, .exp-card:hover, .experience-card:hover, .project-card:hover, .skill-group:hover, .glass-tile:hover, .certification-card:hover, .cert-card:hover, [class*="cert"]:hover {
+  transform: scale(1.04) translateY(-6px) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 
+              0 0 25px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ============================================= 
+   AI AVATAR STICKER REMINDER (POSITION FIXED)
+============================================= */
+.ai-sticker-badge {
+  position: fixed;
+  bottom: 90px; /* Shifted upward to prevent overlapping the input tray */
+  right: 24px;
+  background: #5C6AC4; 
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 16px;
+  border: 3px solid #ffffff; 
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.25); 
+  transform: rotate(-5deg); 
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 99; /* Lowered slightly below the active chatbot modal container */
+  cursor: pointer;
+  animation: stickerFloat 3s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-sticker-badge:hover {
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ai-sticker-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00ffcc; 
+  border-radius: 50%;
+  position: relative;
+}
+
+.ai-sticker-badge .pulse-dot::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  animation: stickerPulse 2s ease-out infinite;
+}
+
+@keyframes stickerFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-6px) rotate(-3deg); }
+}
+
+@keyframes stickerPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
 </style>
-</head>
-<body>
 
-<canvas id="droplets" aria-hidden="true"></canvas>
-<div class="blob blob-1" aria-hidden="true"></div>
-<div class="blob blob-2" aria-hidden="true"></div>
-<div class="blob blob-3" aria-hidden="true"></div>
-
+<!-- AI Assistant Sticker Reminder -->
+<div class="ai-sticker-badge">
+  <span class="pulse-dot"></span>
+  🧙‍♂️Ask Avira
+</div>
 <a href="#main" style="position:absolute;left:-999px;top:0;background:var(--primary);color:#05070D;padding:12px 20px;border-radius:8px;z-index:9999;">Skip to content</a>
 
 <header class="navbar" id="navbar">
