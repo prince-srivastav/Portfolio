@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Prince Srivastav — MIS & Operations Analyst | Power BI · SQL Basics · Excel MIS</title>
 <meta name="description" content="Prince Srivastav — MBA (Operations & IT), MIS & IT Operations professional specializing in Power BI dashboards, Excel MIS automation and ERP reporting. Open to MIS Analyst, Data Analyst and Operations roles.">
 <meta name="theme-color" content="#05070D">
@@ -109,6 +109,15 @@ body::before{
   100%{ transform:scale(1.15) rotate(-3deg); }
 }
 .blob{position:fixed; border-radius:50%; filter:blur(100px); pointer-events:none; opacity:var(--blob-op); mix-blend-mode:screen; z-index:-9;}
+@media(max-width:768px){
+  :root{ --blur:16px; }
+  .blob{filter:blur(50px);}
+  .blob-1{width:260px; height:260px;}
+  .blob-2{width:300px; height:300px;}
+  .blob-3{width:240px; height:240px;}
+  .glass, .glass-tile{box-shadow:0 8px 24px rgba(0,0,0,.22);}
+  canvas#droplets{display:none;}
+}
 html[data-theme="light"] .blob{mix-blend-mode:multiply;}
 .blob-1{width:420px; height:420px; background:#5AA9E6; left:-120px; top:-60px; animation:blobOne 18s infinite ease-in-out;}
 .blob-2{width:520px; height:520px; background:#8B5CF6; right:-180px; top:20%; animation:blobTwo 20s infinite ease-in-out;}
@@ -383,10 +392,20 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
 .ai-suggestions button{padding:7px 13px; border-radius:999px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-soft); font-size:.72rem; cursor:pointer; transition:.25s;}
 .ai-suggestions button:hover{background:var(--glass-2); color:var(--text);}
 .ai-input-row{display:flex; gap:10px; padding:14px 16px; border-top:1px solid var(--line); flex-shrink:0;}
-.ai-input-row input{flex:1; background:var(--input-bg); border:1px solid var(--line); border-radius:999px; padding:11px 18px; color:var(--text); font-size:.85rem; font-family:inherit;}
+.ai-input-row input{flex:1; background:var(--input-bg); border:1px solid var(--line); border-radius:999px; padding:11px 18px; color:var(--text); font-size:16px; font-family:inherit;}
 .ai-input-row input:focus{outline:none; border-color:var(--primary);}
 .ai-input-row button{width:40px; height:40px; border-radius:50%; border:none; cursor:pointer; flex-shrink:0; background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#05070D; font-size:.9rem;}
-@media(max-width:480px){ .ai-panel{width:92vw; right:-6px; height:70vh;} }
+@media(max-width:600px){
+  .ai-panel{
+    position:fixed; inset:0; right:auto; bottom:auto;
+    width:100vw; max-width:100vw; height:100dvh; max-height:100dvh;
+    border-radius:0; transform:none; transform-origin:center;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .ai-panel:not(.open){opacity:0; pointer-events:none; transform:translateY(16px);}
+  .ai-panel.open{transform:none;}
+  .ai-panel-header{padding-top:calc(18px + env(safe-area-inset-top));}
+}
 
 .fade-up{opacity:1; transform:none; transition:opacity .8s ease, transform .8s ease;}
 .fade-up.pre-reveal{opacity:0; transform:translateY(46px);}
@@ -411,7 +430,7 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
 ============================================= */
 .ai-sticker-badge {
   position: fixed;
-  bottom: 90px; /* Shifted upward to prevent overlapping the input tray */
+  bottom: 92px;
   right: 24px;
   background: #5C6AC4; 
   color: #ffffff;
@@ -427,11 +446,13 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
   display: flex;
   align-items: center;
   gap: 4px;
-  z-index: 99; /* Lowered slightly below the active chatbot modal container */
+  z-index: 940;
   cursor: pointer;
   animation: stickerFloat 3s ease-in-out infinite;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: none;
 }
+@media(max-width:480px){ .ai-sticker-badge{ font-size:.72rem; padding:7px 12px; bottom:86px; right:18px; } }
 
 .ai-sticker-badge:hover {
   transform: scale(1.08) rotate(2deg);
@@ -476,6 +497,27 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
 </div>
 <a href="#main" style="position:absolute;left:-999px;top:0;background:var(--primary);color:#05070D;padding:12px 20px;border-radius:8px;z-index:9999;">Skip to content</a>
 
+<!-- ============================================================
+     RESUME FILE — CHANGE ONLY THIS ONE LINE WHEN YOU UPDATE YOUR RESUME.
+     1. Put your new resume PDF in the same folder as this index.html
+     2. Update the filename below to match it exactly
+     Every download button, "Open in New Tab" link, and the in-page
+     resume viewer on this site all read from this single value —
+     nothing else in the file needs to change.
+     ============================================================ -->
+<script>
+  window.RESUME_PDF_FILE = "Prince_Srivastav_Resume.pdf";
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.js-resume-link').forEach(function(el){
+      el.setAttribute('href', window.RESUME_PDF_FILE);
+    });
+    var frame = document.querySelector('.js-resume-frame');
+    if(frame && frame.src.indexOf('docs.google.com/gview') === -1){
+      frame.setAttribute('src', window.RESUME_PDF_FILE);
+    }
+  });
+</script>
+
 <header class="navbar" id="navbar">
   <div class="container">
     <div class="nav-wrapper glass">
@@ -491,7 +533,7 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
         <a href="#contact">Contact</a>
       </nav>
       <div class="nav-actions">
-        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-glass btn-sm nav-cta" download>Resume</a>
+        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-glass btn-sm nav-cta js-resume-link" download>Resume</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 3V1M12 23v-2M4.2 4.2L2.8 2.8M21.2 21.2l-1.4-1.4M23 12h-2M3 12H1M19.8 4.2l1.4-1.4M2.8 21.2l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none"><path d="M21 12.6A9 9 0 1 1 11.4 3a7 7 0 0 0 9.6 9.6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -505,7 +547,7 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
 <nav class="mobile-nav glass" id="mobileNav">
   <a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a>
   <a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a>
-  <a href="Prince_Srivastav_Resume.pdf" download>Download Resume</a>
+  <a href="Prince_Srivastav_Resume.pdf" class="js-resume-link" download>Download Resume</a>
 </nav>
 
 <main id="main">
@@ -532,12 +574,12 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
 
       <div class="hero-actions fade-up">
         <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-glass" download>Download Resume</a>
+        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-glass js-resume-link" download>Download Resume</a>
         <a href="#contact" class="btn btn-glass">Get in Touch</a>
       </div>
 
       <div class="hero-stats fade-up">
-        <div class="glass-tile stat-card"><span>DPRs &amp; EPC Reports</span><h4>75+</h4></div>
+        <div class="glass-tile stat-card"><span>DPRs &amp; EPC Reports</span><h4>80+</h4></div>
         <div class="glass-tile stat-card"><span>Reporting Accuracy</span><h4>+15%</h4></div>
         <div class="glass-tile stat-card"><span>Core Tools</span><h4>Excel &amp; MS Office</h4></div>
         <div class="glass-tile stat-card"><span>Status</span><h4>MBA '26</h4></div>
@@ -588,10 +630,13 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
           gather inputs and compile every report. That's not intern work — that's operational ownership.
         </p>
         <p>
-          I also co-authored a published research paper on AI-driven analytics that demonstrated a
-          23% improvement in conversion rates and a 25% sales lift, proving I apply analytics
-          strategically, not just technically. I hold 8 certifications spanning Business Intelligence,
-          Financial Analytics (NISM · SEBI), AI tools and Management — I invest in staying current.
+          Beyond the job, I go looking for messy, real-world data to practice on. For an operations
+          hiring assignment, I turned raw, unprocessed ERP-style inspection data into a ranked
+          on-time-delivery scorecard across 7 factories — then documented what the data still
+          couldn't tell us. For my MBA, I ran an end-to-end consumer research study, from
+          questionnaire design to hypothesis testing. I hold 8 certifications spanning Business
+          Intelligence, Financial Analytics (NISM · SEBI), AI tools and Management — I invest in
+          staying current.
         </p>
 
         <div class="about-facts">
@@ -626,15 +671,16 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
         <span class="exp-loc">Noida, India</span>
       </div>
       <div class="exp-body">
-        <h3>Backend Operations &amp; CAM Executive (Internship)</h3>
+        <h3>Backend IT Operations &amp; MIS Trainee</h3>
         <h4>SLnko Energy</h4>
         <ul class="exp-list">
-          <li>Managed comprehensive <strong>Backend Operations</strong> workflows, coordinating internal project tracking documentation and daily data assets.</li>
-          <li>Executed <strong>Customer Account Management (CAM)</strong> processes to bridge operational statuses with stakeholder performance requirements.</li>
-          <li>Automated and maintained project progress visibility matrices using Excel automation structures.</li>
+          <li>Prepared <strong>80+ DPRs and EPC reports</strong> integrating PVSyst simulation data, BOQ, cost estimates and project schedules for MW-scale solar plants — ensuring documentation accuracy and version control across all project approvals.</li>
+          <li>Built <strong>automated Excel MIS dashboards</strong> with reporting workflows, improving backend reporting accuracy by <strong>15%</strong> and reducing manual errors in cross-team reviews.</li>
+          <li>Standardised reporting templates and data formats across engineering, finance and operations — enabling consistent, structured data for management decision-making.</li>
+          <li>Coordinated with cross-functional teams to collect project inputs and deliver structured reports on time for senior management review.</li>
         </ul>
         <div class="exp-tags">
-          <span>Backend Operations</span><span>CAM Role</span><span>MS Excel</span><span>Operations Tracking</span>
+          <span>MIS Automation</span><span>Excel Dashboards</span><span>PVSyst</span><span>DPR/EPC Reporting</span>
         </div>
       </div>
     </article>
@@ -663,12 +709,12 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
     <div class="section-heading fade-up">
       <span class="eyebrow">Projects</span>
       <h2>Reports built to be <span class="text-gradient">actually used.</span></h2>
-      <p class="lede">Three real deliverables — operational, analytical, and research-driven.</p>
+      <p class="lede">Four real deliverables — operational, analytical, and research-driven.</p>
     </div>
 
     <div class="projects-grid">
 
-      <!-- Project 1: Solar Plant DPR Reporting System (Updated to 75+) -->
+      <!-- Project 1: Solar Plant DPR Reporting System -->
     <article class="project-card glass fade-up">
       <div class="project-visual">
         <div class="mock-window">
@@ -685,22 +731,48 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
       <div class="project-copy">
         <span class="eyebrow">Excel &middot; MS Office &middot; PVSyst</span>
         <h3>Solar Plant DPR Reporting System</h3>
-        <p>Designed a standardised Excel template for DPR compilation covering PVSyst outputs, plant specs, costing and timelines &ndash; used across <strong>75+ solar project reports</strong>, eliminating inconsistent ad-hoc formats. Paired with reporting workflows, improving backend report-to-project-wise cost, capacity and schedule tracking.</p>
-        <div class="project-tech"><span>Excel</span><span>MS Office</span><span>Operations Tracking</span></div>
+        <p>Designed a standardised Excel template for DPR compilation covering PVSyst outputs, plant specs, costing and timelines &ndash; used across <strong>80+ solar project reports</strong>, eliminating inconsistent ad-hoc formats. Built a companion Power BI dashboard (DAX, Power Query) for project-wise cost, capacity and schedule tracking across multiple MW-scale plants.</p>
+        <div class="project-tech"><span>Excel</span><span>Power BI</span><span>PVSyst</span></div>
       </div>
     </article>
 
-    <!-- Project 2: Business KPI Dashboard -->
+    <!-- Project 2: Monthly Vendor Factory Scorecard (NEW) -->
     <article class="project-card glass reverse fade-up">
       <div class="project-copy">
-        <span class="eyebrow">Operations Analytics</span>
-        <h3>Business KPI Dashboard</h3>
-        <p>An advanced interactive operations tracking system built to visualize department benchmarks, maintain data transparency across teams, and consolidate corporate performance indicators.</p>
+        <span class="eyebrow">Operations &middot; Vendor Management</span>
+        <h3>Monthly Vendor Factory Scorecard</h3>
+        <p>Given raw, unprocessed ERP-style inspection data across 7 factories &ndash; no pre-built "on-time %" or "delay days" columns, just dates and quantities &ndash; I built a ranked, factory-wise scorecard from scratch. Handled the messy parts directly: SKUs split across partial shipments, orders not yet inspected, factories that shipped part of an order early and the rest late. Ranked factories from <strong>92.2% on-time</strong> (best) to <strong>17.3% on-time</strong> (worst, avg. 24.8 days late), then went further &ndash; documenting <strong>7 things the timing data alone couldn't tell us</strong> (defect rate, delay reason, advance-warning behaviour, rework rate, month-on-month trend, buyer-to-factory date buffer, and documentation compliance) and how I'd go about getting each one.</p>
         <div class="project-tech">
-          <span>MS Excel</span><span>Advanced Dashboards</span><span>Data Analytics</span>
+          <span>Excel</span><span>Data Cleaning</span><span>Vendor Performance</span><span>KPI Design</span>
         </div>
-        <a href="#" class="project-link">View Dashboard Layout &rarr;</a>
+        <a href="Vendor_Factory_Scorecard.xlsx" class="project-link" download>Download Scorecard Workbook &rarr;</a>
       </div>
+      <div class="project-visual">
+        <div class="mock-window">
+          <div class="mock-bar"><i></i><i></i><i></i><span>Vendor_Factory_Scorecard.xlsx</span></div>
+          <div class="mock-rows" style="gap:12px;">
+            <div class="mock-row" style="justify-content:space-between; align-items:center;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--accent);">Khurja Pottery Co</span>
+              <span class="mock-cell" style="width:38%; background:rgba(57,217,138,.28); border:1px solid rgba(57,217,138,.4);"></span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--text-fade);">92.2%</span>
+            </div>
+            <div class="mock-row" style="justify-content:space-between; align-items:center;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--text-soft);">Panipat Textile Mills</span>
+              <span class="mock-cell" style="width:26%; background:rgba(242,184,75,.28); border:1px solid rgba(242,184,75,.4);"></span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--text-fade);">63.6%</span>
+            </div>
+            <div class="mock-row" style="justify-content:space-between; align-items:center;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--text-soft);">RKI Lumbers Pvt Ltd</span>
+              <span class="mock-cell" style="width:7%; background:rgba(239,90,90,.28); border:1px solid rgba(239,90,90,.4);"></span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--text-fade);">17.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3: Business KPI Dashboard -->
+    <article class="project-card glass fade-up">
       <div class="project-visual">
         <div class="mock-window">
           <div class="mock-bar"><i></i><i></i><i></i><span>kpi_dashboard.xlsx</span></div>
@@ -711,10 +783,27 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
           </div>
         </div>
       </div>
+      <div class="project-copy">
+        <span class="eyebrow">Power BI &middot; Excel</span>
+        <h3>Business KPI Dashboard</h3>
+        <p>Designed an interactive Power BI dashboard &ndash; with DAX, data modelling and table relationships &ndash; for business KPI visualisation as part of MBA coursework, consolidating department benchmarks and performance indicators into one view.</p>
+        <div class="project-tech">
+          <span>Power BI</span><span>DAX</span><span>Data Modeling</span>
+        </div>
+      </div>
     </article>
 
-    <!-- Project 3: MBA 4th Sem Research Report -->
-    <article class="project-card glass fade-up">
+    <!-- Project 4: MBA Research Project Report -->
+    <article class="project-card glass reverse fade-up">
+      <div class="project-copy">
+        <span class="eyebrow">Academic Research &middot; MBA RPR</span>
+        <h3>Consumer Preferences in Men's Apparel Market</h3>
+        <p>A full MBA research project (AKTU, BMB406) undertaken at Myntra &ndash; from questionnaire design through hypothesis testing. Surveyed shoppers and found <strong>80% face difficulty matching outfits online</strong>, <strong>85% want curated, pre-matched outfit sets</strong>, and an equal <strong>85% value skin-tone and body-type based personalisation</strong>. Ran ANOVA-style cross-tabulation and hypothesis testing (H1&ndash;H3) linking body type and shopping difficulty to purchase intent, and closed with concrete recommendations for e-commerce platforms and apparel brands.</p>
+        <div class="project-tech">
+          <span>Survey Research</span><span>Hypothesis Testing</span><span>Cross-Tabulation</span>
+        </div>
+        <a href="Prince_Srivastav_RPR_Mens_Apparel_Market.pdf" class="project-link" download>Download Full RPR &rarr;</a>
+      </div>
       <div class="project-visual">
         <div class="mock-window">
           <div class="mock-bar"><i></i><i></i><i></i><span>research_report.pdf</span></div>
@@ -724,15 +813,6 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
             <div class="mock-cell violet w60"></div>
           </div>
         </div>
-      </div>
-      <div class="project-copy">
-        <span class="eyebrow">Academic Research</span>
-        <h3>MBA 4th Sem Research Report</h3>
-        <p>A data-backed research analysis compiled during my final semester, analyzing consumer trends, operational frameworks, and data processing models.</p>
-        <div class="project-tech">
-          <span>Market Research</span><span>Operations Strategy</span><span>Data Presentation</span>
-        </div>
-        <a href="Research_Report.pdf" class="project-link" download>Download PDF Report &rarr;</a>
       </div>
     </article>
 </div>
@@ -746,9 +826,25 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
       <h2>Curriculum Vitae</h2>
       <p class="lede">Review my qualifications, academic history, and background directly within the portfolio frame.</p>
     </div>
-    <div class="glass fade-up" style="padding: 16px; height: 750px; background: rgba(255,255,255,0.03); overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
-      <iframe src="https://drive.google.com/file/d/1Q0GQdm9QSFbYoz9qGEccsjJbbk8yDJsp/preview" width="100%" height="100%" style="border: none; border-radius: 12px; background: white;" allow="autoplay"></iframe>
+    <div class="glass fade-up" style="padding: 16px; height: 750px; background: rgba(255,255,255,0.03); overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); display:flex; flex-direction:column; gap:12px;">
+      <iframe id="resumeFrame" class="js-resume-frame" src="Prince_Srivastav_Resume.pdf" width="100%" height="100%" style="border: none; border-radius: 12px; background: white; flex:1;"></iframe>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0;">
+        <a href="Prince_Srivastav_Resume.pdf" target="_blank" rel="noopener" class="btn btn-glass btn-sm js-resume-link">Open in New Tab</a>
+        <a href="Prince_Srivastav_Resume.pdf" download class="btn btn-primary btn-sm js-resume-link">Download PDF</a>
+      </div>
     </div>
+    <script>
+    (function(){
+      // Most mobile browsers have no built-in PDF renderer for iframes and just show blank.
+      // Swap to Google's viewer on touch devices, where the file is reachable over https.
+      var isTouch = window.matchMedia('(pointer:coarse)').matches;
+      if(isTouch && location.protocol==='https:'){
+        var frame=document.getElementById('resumeFrame');
+        var absUrl=new URL(window.RESUME_PDF_FILE || 'Prince_Srivastav_Resume.pdf', location.href).href;
+        frame.src='https://docs.google.com/gview?url='+encodeURIComponent(absUrl)+'&embedded=true';
+      }
+    })();
+    </script>
   </div>
 </section>
 
@@ -827,8 +923,8 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
         <p>Same information — DPRs delivered, reporting accuracy, certifications — as a clean, single-page PDF.</p>
       </div>
       <div class="resume-actions">
-        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-primary" download>Download PDF</a>
-        <a href="Prince_Srivastav_Resume.pdf" target="_blank" rel="noopener" class="btn btn-glass">Open Full Screen</a>
+        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-primary js-resume-link" download>Download PDF</a>
+        <a href="Prince_Srivastav_Resume.pdf" target="_blank" rel="noopener" class="btn btn-glass js-resume-link">Open Full Screen</a>
       </div>
     </div>
   </div>
@@ -857,7 +953,7 @@ html[data-theme="light"] .icon-moon{opacity:0; transform:rotate(-90deg) scale(.4
           <a href="https://linkedin.com/in/princesrivastav" target="_blank" rel="noopener" class="btn btn-glass btn-sm">LinkedIn</a>
           <a href="https://github.com/prince-srivastav" target="_blank" rel="noopener" class="btn btn-glass btn-sm">GitHub</a>
         </div>
-        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-primary" download style="margin-top:20px; width:100%;">Download Resume</a>
+        <a href="Prince_Srivastav_Resume.pdf" class="btn btn-primary js-resume-link" download style="margin-top:20px; width:100%;">Download Resume</a>
       </div>
 
       <form class="contact-form glass fade-up" id="contactForm" novalidate>
@@ -996,6 +1092,12 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     if(!reduceMotion) drawDots();
   }catch(e){ /* canvas is decorative only — safe to skip */ }
+
+  /* ---- Pause ambient blob/mesh animation when tab isn't visible (battery/CPU) ---- */
+  document.addEventListener('visibilitychange', function(){
+    document.body.style.setProperty('animation-play-state', document.hidden ? 'paused' : 'running');
+    document.querySelectorAll('.blob').forEach(function(b){ b.style.animationPlayState = document.hidden ? 'paused' : 'running'; });
+  });
 
   /* ---- Anchor navigation: works with plain browser behaviour, no
      external library required. We only intervene to correct for the
@@ -1180,16 +1282,16 @@ document.addEventListener('DOMContentLoaded', function(){
       keys:['experience','work','job','career','slnko','trainee','role','company','backend'],
       variants:[
         "Prince worked as a Backend IT Operations & MIS Trainee at SLnko Energy (Sep–Dec 2025) in Noida. He prepared 80+ DPR and EPC reports for MW-scale solar plants using PVSyst data, and built automated Excel MIS dashboards that lifted reporting accuracy by 15%.",
-        "At SLnko Energy he moved from a CAM internship into backend operations, where he compiled DPRs (Detailed Project Reports) and EPC documentation for solar projects — pulling simulation data from PVSyst and coordinating with engineering, finance and operations teams.",
-        "His main hands-on role: MIS Trainee at SLnko Energy, Noida, Sep–Dec 2025. Delivered 80+ structured reports and standardised reporting templates across departments, improving accuracy by 15%."
+        "At SLnko Energy he compiled DPRs (Detailed Project Reports) and EPC documentation for solar projects — pulling simulation data from PVSyst and coordinating with engineering, finance and operations teams to standardise reporting templates.",
+        "His main hands-on role: Backend IT Operations & MIS Trainee at SLnko Energy, Noida, Sep–Dec 2025. Delivered 80+ structured reports and standardised reporting templates across departments, improving accuracy by 15%."
       ]
     },
     {
-      keys:['project','projects','built','portfolio site','dashboard project'],
+      keys:['project','projects','built','portfolio site','dashboard project','vendor','scorecard','factory'],
       variants:[
-        "Three main projects: a Solar Plant DPR Reporting System (Excel + Power BI, used across 80+ reports), a Business KPI Dashboard (Power BI with DAX and data modelling from his MBA coursework), and a published Consumer Analytics research paper that showed a 23% conversion lift.",
-        "He's built a standardised Excel/Power BI template for solar DPR reporting, an interactive KPI dashboard in Power BI, and co-authored research on AI-driven analytics with measurable business impact — a 25% sales lift.",
-        "Notable work includes the Solar Plant DPR system he built at SLnko, a Business KPI Power BI dashboard, and a research project on consumer behaviour using AI-driven analytics."
+        "Four main projects: a Solar Plant DPR Reporting System (Excel + Power BI, used across 80+ reports), a Monthly Vendor Factory Scorecard (turned raw ERP inspection data into a ranked on-time-delivery scorecard across 7 factories), a Business KPI Dashboard (Power BI with DAX), and a full MBA research project on consumer preferences in men's apparel.",
+        "He's built a standardised Excel/Power BI template for solar DPR reporting, a vendor factory scorecard from raw inspection data for an operations hiring assignment, an interactive KPI dashboard in Power BI, and an MBA research report surveying online apparel shoppers.",
+        "Notable work: the Solar Plant DPR system at SLnko, a Vendor Factory Scorecard built from raw ERP data (ranking 7 factories on on-time delivery), a Business KPI Power BI dashboard, and an MBA research project on men's apparel consumer behaviour."
       ]
     },
     {
@@ -1243,8 +1345,8 @@ document.addEventListener('DOMContentLoaded', function(){
     {
       keys:['summarize','summary of portfolio','overview','tl;dr','tldr'],
       variants:[
-        "In short: MBA grad, MIS & Operations background, strongest at Excel/Power BI reporting. Delivered 80+ DPR/EPC reports at SLnko Energy with a 15% accuracy improvement, built two Power BI dashboards, co-authored a research paper with a 25% sales-lift finding, and holds 8+ certifications. Targeting MIS/Data Analyst/Operations roles.",
-        "Quick summary: Prince pairs an Operations & IT MBA with real reporting-system experience — Excel MIS automation, Power BI dashboards, and DPR/EPC documentation for solar projects at SLnko Energy. He's looking for MIS, Data Analyst or Operations roles next."
+        "In short: MBA grad, MIS & Operations background, strongest at Excel/Power BI reporting. Delivered 80+ DPR/EPC reports at SLnko Energy with a 15% accuracy improvement, built a vendor factory scorecard from raw ERP data, a Power BI KPI dashboard, and completed a full MBA consumer research project. Holds 4+ certifications. Targeting MIS/Data Analyst/Operations roles.",
+        "Quick summary: Prince pairs an Operations & IT MBA with real reporting-system experience — Excel MIS automation, Power BI dashboards, DPR/EPC documentation for solar projects at SLnko Energy, and a vendor scorecard built from raw factory inspection data. He's looking for MIS, Data Analyst or Operations roles next."
       ]
     },
     {
